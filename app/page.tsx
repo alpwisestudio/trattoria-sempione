@@ -1,6 +1,9 @@
-const ADDRESS = "Corso Sempione, 210, 21052 Busto Arsizio VA";
-const MAPS_LINK =
-  "https://www.google.com/maps/search/?api=1&query=Trattoria+Sempione+210+Busto+Arsizio";
+import Link from "next/link";
+import Reveal from "./components/Reveal";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import { ADDRESS, MAPS_LINK } from "./lib/site";
+
 const MAP_EMBED =
   "https://www.openstreetmap.org/export/embed.html?bbox=8.8350%2C45.6050%2C8.8700%2C45.6250&layer=mapnik";
 
@@ -27,26 +30,12 @@ const reviews = [
   { q: "Le brioches sono ottime, il ragù ancora meglio.", a: "Utente Google" },
 ];
 
-import Reveal from "./components/Reveal";
 
 export default function Home() {
   return (
     <>
       <Reveal />
-      <header className="site-header">
-        <a href="#top" className="brand">
-          <span className="brand-name">Trattoria Sempione</span>
-        </a>
-        <nav className="nav" aria-label="Principale">
-          <a href="#menu">Menu</a>
-          <a href="#orari">Orari</a>
-          <a href="#storia">Il locale</a>
-          <a href="#recensioni">Recensioni</a>
-        </nav>
-        <a className="btn btn-amber" href="#orari">
-          Ordina da asporto
-        </a>
-      </header>
+      <Header />
 
       <main id="top">
         {/* HERO */}
@@ -87,7 +76,7 @@ export default function Home() {
                 <div className="card-body">
                   <h3>{d.name}</h3>
                   <p>{d.note}</p>
-                  <a className="btn btn-outline" href="#orari">Ordina</a>
+                  <Link className="btn btn-amber" href="/prenota">Prenota</Link>
                 </div>
               </article>
             ))}
@@ -164,36 +153,7 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="site-footer">
-        <div className="foot-grid">
-          <div>
-            <p className="foot-brand">Trattoria Sempione</p>
-            <p className="foot-text">
-              Ragù, polenta e pappardelle come a casa. Posti all&apos;aperto e cibo da asporto.
-            </p>
-          </div>
-          <div>
-            <h4>Dove siamo</h4>
-            <p className="foot-text">Corso Sempione, 210</p>
-            <p className="foot-text">21052 Busto Arsizio (VA)</p>
-            <a className="foot-link" href={MAPS_LINK} target="_blank" rel="noreferrer">
-              Indicazioni stradali →
-            </a>
-          </div>
-          <div>
-            <h4>Orari</h4>
-            <p className="foot-text">Lun – Ven · 07:30 – 19:00</p>
-            <p className="foot-text">Sabato · 11:00 – 19:00</p>
-            <p className="foot-text">Domenica · Chiuso</p>
-          </div>
-        </div>
-        <p className="credits">
-          © 2026 Trattoria Sempione 210 · Foto illustrative da Wikimedia Commons (CC BY, CC BY-SA,
-          pubblico dominio): Babbo e Osteria Epoca (pappardelle), Polenta tradicional con ragú de
-          carne, Brioche aux pépites de chocolat, Chocolate brioche and latte, Tagliatelle al ragù
-          Trattoria Tony.
-        </p>
-      </footer>
+      <Footer />
     </>
   );
 }

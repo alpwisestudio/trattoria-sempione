@@ -15,6 +15,8 @@ const SELECTORS = [
   ".hours-card",
   ".map",
   "blockquote",
+  ".book-head > *",
+  ".book-card",
   ".site-footer > *",
 ].join(",");
 
@@ -27,7 +29,7 @@ export default function Reveal() {
     els.forEach((el) => {
       const idx = Array.from(el.parentElement?.children ?? []).indexOf(el);
       el.dataset.reveal = "";
-      el.style.setProperty("--d", `${Math.min(idx, 5) * 90}ms`);
+      el.style.setProperty("--d", `${Math.min(idx, 6) * 70}ms`);
     });
     root.classList.add("reveal-ready");
 
@@ -46,13 +48,16 @@ export default function Reveal() {
 
     const links = Array.from(document.querySelectorAll<HTMLAnchorElement>(".nav a"));
     const sections = links
-      .map((a) => document.querySelector<HTMLElement>(a.getAttribute("href") ?? ""))
+      .map((a) => {
+        const id = (a.getAttribute("href") ?? "").split("#")[1];
+        return id ? document.getElementById(id) : null;
+      })
       .filter((s): s is HTMLElement => !!s);
     const spy = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
           if (!e.isIntersecting) continue;
-          links.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === `#${e.target.id}`));
+          links.forEach((a) => a.classList.toggle("active", a.getAttribute("href")?.endsWith(`#${e.target.id}`)));
         }
       },
       { rootMargin: "-45% 0px -50% 0px" },
@@ -60,7 +65,10 @@ export default function Reveal() {
     sections.forEach((s) => spy.observe(s));
 
     const header = document.querySelector(".site-header");
-    const onScroll = () => header?.classList.toggle("scrolled", scrollY > 24);
+    const solid = header?.hasAttribute("data-solid");
+    const onScroll = () => {
+      if (!solid) header?.classList.toggle("scrolled", scrollY > 24);
+    };
     onScroll();
     addEventListener("scroll", onScroll, { passive: true });
 

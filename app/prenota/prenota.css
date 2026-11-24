@@ -1,0 +1,52 @@
+/* ---------- pagina prenota ---------- */
+.book-page { padding: 6rem var(--px) 4rem; }
+.book {
+  position: relative;
+  padding: 3.5rem 2rem 4rem;
+  border-radius: 14px;
+  background:
+    radial-gradient(40rem 20rem at 20% 0%, rgb(255 255 255 / 0.06), transparent 70%),
+    var(--green-d);
+  color: #fff;
+  box-shadow: 0 30px 70px rgb(40 70 30 / 0.25);
+}
+.book .leaf { opacity: 0.4; }
+.book-head { position: relative; z-index: 1; text-align: center; max-width: 52ch; margin: 0 auto 2.5rem; }
+.book-eyebrow { margin: 0 0 0.4rem; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.04em; color: #cfe0bd; }
+.book-head h1 { font-size: clamp(2rem, 4.5vw, 3rem); line-height: 1.15; margin: 0 0 0.9rem; }
+.book-head p:last-child { margin: 0; color: #d7e4c8; }
+.book-card {
+  position: relative; z-index: 1;
+  max-width: 580px; margin: 0 auto; padding: 2.4rem;
+  background: #fff; color: var(--ink);
+  border-radius: 10px;
+  box-shadow: 0 24px 50px rgb(0 0 0 / 0.25);
+  display: grid; gap: 1.4rem;
+}
+.field { display: grid; gap: 0.45rem; }
+.field > span { font-size: 0.8rem; font-weight: 600; color: var(--muted); }
+.field b { color: #c0392b; font-weight: 600; }
+.field input, .field select, .field textarea {
+  width: 100%; font: inherit; font-size: 0.95rem; color: var(--ink);
+  padding: 0.75rem 0.9rem; background: #fff;
+  border: 1px solid #d5dccb; border-radius: 6px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.field textarea { resize: vertical; min-height: 110px; }
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: none; border-color: var(--green); box-shadow: 0 0 0 3px rgb(74 107 58 / 0.18);
+}
+.field select:disabled { background: #f3f5ef; color: #8a9484; cursor: not-allowed; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+.field-err { font-style: normal; font-size: 0.8rem; color: #b0432f; }
+.book-card .btn { border: 0; cursor: pointer; font-family: inherit; padding: 0.9rem 1.8rem; justify-self: start; }
+.book-card .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+@media (max-width: 900px) {
+  .book { padding: 2.2rem 1rem 2.5rem; }
+  .book-card { padding: 1.5rem 1.25rem; }
+  .field-row { grid-template-columns: 1fr; }
+  .book-card .btn { width: 100%; justify-self: stretch; }
+}
+.book-alt { margin: -0.4rem 0 0; font-size: 0.85rem; color: var(--muted); }
+.book-alt a { color: var(--ink); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.book-alt a:hover { color: var(--green); }

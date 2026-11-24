@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ViewTransition } from "react";
 import { Playfair_Display, DM_Sans } from "next/font/google";
 import "./globals.css";
 
@@ -22,8 +23,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="it" className={`${display.variable} ${dm.variable}`}>
-      <body>{children}</body>
+    <html lang="it" data-scroll-behavior="smooth" className={`${display.variable} ${dm.variable}`}>
+      <body>
+        <ViewTransition default="page">{children}</ViewTransition>
+      </body>
     </html>
   );
 }
